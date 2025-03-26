@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js";
 import { validationResult } from "express-validator";
 
+//Method to Register a User
 const registerUser = async (req, res, next) => {
   //Handle Validation Errors
   const errors = validationResult(req);
@@ -18,7 +19,7 @@ const registerUser = async (req, res, next) => {
     if (isUserAlready) {
       return res
         .status(409)
-        .json({ errors: [{ msg: "User    already exists" }] });
+        .json({ errors: [{ msg: "User already exists" }] });
     }
 
     // Create a new user
@@ -36,7 +37,7 @@ const registerUser = async (req, res, next) => {
 
     res
       .status(201)
-      .json({ Message: "User is register Successfulyy", user, token });
+      .json({ Message: "User is register  Successfully", user, token });
   } catch (error) {
     console.log("Error while registering user", error);
     return res
@@ -45,4 +46,37 @@ const registerUser = async (req, res, next) => {
   }
 };
 
-export { registerUser };
+
+//Method to Login a User
+const loginUser = async (req,res)=> {
+   //Handle Validation Errors
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+     return res.status(404).json({ errors: errors.array() });
+   }
+  try {
+    const {email, password} = req.body;
+
+    const user = await User.findOne({email}).select('+password');
+    if(!user)
+    {
+      return res.status(401).json({Message: "Invalid Email or Pssword"})
+    }
+    
+    const isMatch = await user.comparePassword(password)
+    if(!isMatch){
+      return res.status(401).json({Message: "Invalid Email or Pssword"})
+    }
+
+    const token = user.generateAuthToken();
+
+    return res.status(200).json({Message: " User Login Successfully", user, token})
+  } catch (error) {
+    console.log("Error while Login a user", error);
+    return res
+      .status(500)
+      .json({ Message: "Error while Login user", error });
+  }
+}
+
+export { registerUser,loginUser };
