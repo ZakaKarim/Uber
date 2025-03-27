@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 const app = express();
+import cookieParser from "cookie-parser";
 import connectDB from "./db/db.js";
 import cors from "cors";
 
@@ -8,9 +9,10 @@ import cors from "cors";
 connectDB();
 
 // Middleware Setup
+app.use(cors());
 app.use(express.json({ limit: "30kb" }));
 app.use(express.urlencoded({ extended: true, limit: "30kb" }));
-app.use(cors());
+app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Hello World..");
