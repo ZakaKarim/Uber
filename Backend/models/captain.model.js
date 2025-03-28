@@ -89,6 +89,13 @@ captainSchema.pre("save", async function (next) {
   next();
 });
 
+//Method to manually hash the password i am not using it right now 
+// captainSchema.statics.hashPassword = async function (password) {
+//     return await bcrypt.hash(password, 10);
+// }
+
+
+
 //Method to compare the password
 captainSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
