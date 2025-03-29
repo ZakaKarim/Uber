@@ -42,7 +42,7 @@ userSchema.methods.generateAuthToken = function () {
     },
     process.env.JWT_SECRET,
     {
-      expiresIn: "1d",
+      expiresIn: "24h",
     }
   );
   return token;
@@ -54,7 +54,7 @@ userSchema.methods.generateAuthToken = function () {
 //   return await bcrypt.hash(password, 10);
 // };
 
-//This is the Pre Hook method to save the password in the database on save method only
+//This is the Pre Hook method to save the password in the database on the save method only
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
 
@@ -62,7 +62,7 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// //Method to compare the password
+//Method to compare the password
 userSchema.methods.comparePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
