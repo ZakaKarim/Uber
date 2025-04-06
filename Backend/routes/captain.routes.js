@@ -1,7 +1,13 @@
 import express from "express";
 const router = express.Router();
 import { body } from "express-validator";
-import { registerCaptain } from "../controllers/captain.controller.js";
+import { authCaptain } from "../middlewares/auth.middleware.js";
+import {
+  getCaptainProfile,
+  loginCaptain,
+  logoutCaptain,
+  registerCaptain,
+} from "../controllers/captain.controller.js";
 
 //Route to Register a Captain
 router.post(
@@ -30,4 +36,22 @@ router.post(
   registerCaptain
 );
 
+//Route to Login a Captain
+router
+  .route("/login")
+  .post(
+    [
+      body("email").isEmail().withMessage("Invalid Email"),
+      body("password")
+        .isLength({ min: 3 })
+        .withMessage("Password must be at least 3 characters long"),
+    ],
+    loginCaptain
+  );
+
+//Route to View the Profile of the Captain
+router.route("/profile").get(authCaptain, getCaptainProfile);
+
+//Route to Logout a Captain
+router.route("/logout").get(authCaptain, logoutCaptain);
 export default router;
