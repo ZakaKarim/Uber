@@ -1,7 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useState,useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContextData } from "../context/UserContext";
 
 const UserLogin = () => {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [userData, setUserData] = useState({})
+
+  const navigate = useNavigate();
+
+  const {user, setUser} = useContext(UserContextData)
+
+
+  const submitHandle =async (e)=>{
+    e.preventDefault()
+    // console.log("email", email, "password", password)
+  const userData = {
+    email: email,
+    password: password
+  }
+
+   const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/login`, userData);
+    if(response.status === 200){
+      const data = response.data;
+  
+      setUser(data.user);
+  
+      //Naviage to Home Page if everything goes well 
+      navigate('/home')
+    }
+ // console.log("userData", userData)
+    setEmail("")
+    setPassword("")
+
+    
+    
+  }
   return (
     <div className="p-7 h-screen flex flex-col justify-between">
       <div>
@@ -11,10 +47,14 @@ const UserLogin = () => {
           alt="Logo is loading"
           srcset=""
         />
-        <form>
+        <form onSubmit={(e)=>{
+          submitHandle(e)
+        }}>
           <h3 className="text-xl font-bold mb-2">Enter your email</h3>
           <input
             required
+            value={email}
+             onChange={(e) => setEmail(e.target.value)}
             className="bg-[#eeeeee] mb-7 rounded px-4 py-4 text-lg w-full placeholder:text-base"
             type="email"
             placeholder="Enter your email"
@@ -22,6 +62,8 @@ const UserLogin = () => {
           <h3 className="text-xl font-bold mb-2">Enter password</h3>
           <input
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="bg-[#eeeeee] mb-7 rounded px-4 py-4 text-lg w-full placeholder:text-base"
             type="password"
             placeholder="Enter your password"
@@ -32,7 +74,7 @@ const UserLogin = () => {
             Login
           </button>
           <p className=" text-center mt-5">
-            New to Uber?
+            New to Uber?{" "}
             <Link to="/signup" className="text-blue-600">
               Create new Account
             </Link>
@@ -40,9 +82,9 @@ const UserLogin = () => {
         </form>
       </div>
       <div>
-        <button className="flex justify-center text-2xl w-full bg-black text-white py-3 rounded mt-9">
+        <Link to={"/captain-login"} className="flex justify-center text-2xl w-full bg-black text-white py-3 rounded mt-9">
           Login as Captain
-        </button>
+        </Link>
       </div>
     </div>
   );
