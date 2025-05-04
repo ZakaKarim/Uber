@@ -35,7 +35,7 @@ const registerUser = async (req, res, next) => {
     const token = user.generateAuthToken();
 
     // Send welcome email (don't await to avoid delaying response)
-    sendWelcomeEmail(email, fullname.firstname);
+    // sendWelcomeEmail(email, fullname.firstname);
 
     res
       .status(201)

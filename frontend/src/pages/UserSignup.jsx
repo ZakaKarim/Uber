@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContextData } from "../context/UserContext";
@@ -11,7 +11,7 @@ const UserSignup = () => {
   const [userData, setUserData] = useState({});
 
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContextData)
+  const { user, setUser } = useContext(UserContextData);
 
   const submitHandle = async (e) => {
     e.preventDefault();
@@ -19,22 +19,29 @@ const UserSignup = () => {
     const newUser = {
       fullname: {
         firstname: firstName,
-        lastname: lastName
+        lastname: lastName,
       },
       email: email,
       password: password,
+    };
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/user/register`,
+      newUser
+    );
+    if (response.status === 201) {
+      const data = response.data;
+
+      setUser(data.user);
+
+      localStorage.setItem("token", data.token);
+
+      console.log("token", data.token);
+
+      //Naviage to Home Page if everything goes well
+      navigate("/home");
     }
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/user/register`, newUser);
-  if(response.status === 201){
-    const data = response.data;
 
-    setUser(data.user);
-
-    //Naviage to Home Page if everything goes well 
-    navigate('/home')
-  }
-      
-   // console.log("userData", userData);
+    // console.log("userData", userData);
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -88,7 +95,7 @@ const UserSignup = () => {
             value={password}
             //onChange={(e) => setPassword(e.target.value)}
             onChange={(e) => {
-              setPassword(e.target.value)
+              setPassword(e.target.value);
             }}
             className="bg-[#eeeeee] mb-6 rounded px-4 py-4 text-lg w-full placeholder:text-base"
             type="password"
@@ -101,15 +108,18 @@ const UserSignup = () => {
           </button>
         </form>
         <p className=" text-center mt-5">
-            Already have a Account?{" "}
-            <Link to="/login" className="text-blue-600">
-              Click to Login Here
-            </Link>
-          </p>
+          Already have a Account?{" "}
+          <Link to="/login" className="text-blue-600">
+            Click to Login Here
+          </Link>
+        </p>
       </div>
       <div>
-      <p className=' text-[12px]  leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
-      Policy</span> and <span className='underline'>Terms of Service apply</span>.</p>
+        <p className=" text-[12px]  leading-tight">
+          This site is protected by reCAPTCHA and the{" "}
+          <span className="underline">Google Privacy Policy</span> and{" "}
+          <span className="underline">Terms of Service apply</span>.
+        </p>
       </div>
     </div>
   );
