@@ -1,17 +1,17 @@
 import React from "react";
 
-const ConfirmedRide = (props) => {
+const LookingForDrive = (props) => {
   return (
     <div>
       <h1
         className="p-1 text-center top-0 w-[95%] absolute"
         onClick={() => {
-          props.setConfirmRidePanel(false);
+          props.setVehicleFound(false);
         }}
       >
         <i className="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
       </h1>
-      <h2 className="font-medium text-2xl mb-5">Confirm your Ride</h2>
+      <h2 className="font-medium text-2xl mb-5">Looking For Drive</h2>
 
       <div className="flex gap-3 justify-between items-center flex-col">
         <img
@@ -50,18 +50,9 @@ const ConfirmedRide = (props) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => {
-            props.setVehicleFound(true);
-            props.setConfirmRidePanel(false);
-          }}
-          className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
-        >
-          Confirm Ride
-        </button>
       </div>
     </div>
   );
 };
 
-export default ConfirmedRide;
+export default LookingForDrive;

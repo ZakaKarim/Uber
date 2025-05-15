@@ -1,25 +1,32 @@
-import React from "react";
+import React from 'react'
 
-const ConfirmedRide = (props) => {
+const WaitingForDrive = (props) => {
   return (
-    <div>
+     <div>
       <h1
         className="p-1 text-center top-0 w-[95%] absolute"
         onClick={() => {
-          props.setConfirmRidePanel(false);
+          props.waitingForDrive(false);
+          // props.setWaitingForDrive(false)
         }}
       >
         <i className="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
       </h1>
-      <h2 className="font-medium text-2xl mb-5">Confirm your Ride</h2>
-
-      <div className="flex gap-3 justify-between items-center flex-col">
-        <img
-          className="h-20"
+      <div className='flex justify-between items-center'>
+         <img
+          className="h-14"
           src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,h_538,w_956/v1688398971/assets/29/fbb8b0-75b1-4e2a-8533-3a364e7042fa/original/UberSelect-White.png"
           alt=""
           srcset=""
         />
+        <div className='text-right'>
+          <h1 className='text-lg font-medium'>Fahim</h1>
+          <h4 className='text-xl font-semibold -mt-1 -mb-1'>LHR3423</h4>
+          <p className='text-sm font-medium'>passo</p>
+        </div>
+      </div>
+
+      <div className="flex gap-3 justify-between items-center flex-col">
         <div className="w-full mt-5">
           <div className="flex items-center gap-5 mt-2 p-3 border-b-1">
             <i className="text-lg ri-map-pin-2-fill"></i>
@@ -50,18 +57,9 @@ const ConfirmedRide = (props) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={() => {
-            props.setVehicleFound(true);
-            props.setConfirmRidePanel(false);
-          }}
-          className="w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg"
-        >
-          Confirm Ride
-        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ConfirmedRide;
+export default WaitingForDrive

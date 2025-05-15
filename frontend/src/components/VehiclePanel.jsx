@@ -9,7 +9,7 @@ const VehiclePanel = (props) => {
                 props.setVehiclePanel(false)
                 // console.log(setVehiclePanel)
             }} >
-                <i class="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
+                <i className="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
             </h1>
             <h2 className='font-medium text-2xl mb-5'>Choose a Vehicle</h2>
 
