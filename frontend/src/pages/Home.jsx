@@ -215,7 +215,7 @@ const Home = () => {
           <LookingForDrive setVehicleFound={setVehicleFound} />
         </div>
 
-         <div ref={waitingForDriveRef}  className='fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12'>
+         <div ref={waitingForDriveRef}  className='fixed w-full z-10 bottom-0  bg-white px-3 py-6 pt-12'>
           <WaitingForDrive waitingForDrive={waitingForDrive} setWaitingForDrive={setWaitingForDrive} />
         </div>
     </div>
