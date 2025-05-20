@@ -161,7 +161,7 @@ const CaptainSignup = () => {
                 setVehicleType(e.target.value)
               }}
             >
-              <option value="" disabled>Select Vehicle Type</option>
+              <option value="" disabled>Vehicle Type</option>
               <option value="car">Car</option>
               <option value="auto">Auto</option>
               <option value="motorcycle">Motorcycle</option>
@@ -181,7 +181,7 @@ const CaptainSignup = () => {
             </p>
         </div>
         <div>
-        <p className=' text-[12px]  leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
+        <p className=' text-[12px] mt-6 leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
         Policy</span> and <span className='underline'>Terms of Service apply</span>.</p>
         </div>
       </div>
