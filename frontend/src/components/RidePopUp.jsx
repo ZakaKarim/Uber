@@ -1,0 +1,75 @@
+import React from "react";
+
+const RidePopUp = () => {
+  return (
+    <div>
+      <h1
+        className="p-1 text-center top-0 w-[95%] absolute"
+        onClick={() => {
+        }}
+      >
+        <i className="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
+      </h1>
+      <h2 className="font-medium text-2xl mb-5">New Ride Avaiable!</h2>
+
+      <div className="flex items-center justify-between bg-yellow-400 rounded-lg mt-3 p-3">
+        <div className="flex items-center gap-3 ">
+          <img
+            className="h-10 w-10 rounded-full object-cover"
+            src="data:image/jpeg;base64,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"
+            alt=""
+          />
+          <h2 className="text-lg font-medium">Zaka</h2>
+        </div>
+        <h5 className="text-lg font-semibold">2.2km</h5>
+      </div>
+
+      <div className="flex gap-3 justify-between items-center flex-col">
+        <div className="w-full mt-5">
+          <div className="flex items-center gap-5 mt-2 p-3 border-b-1">
+            <i className="text-lg ri-map-pin-2-fill"></i>
+            <div>
+              <h3 className="text-lg font-medium">562-11-A</h3>
+              <p className="text-gray-600 text-base -mt-1">
+                Model Town Link Road Lahore Cantt{" "}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-5 mt-2 p-3 border-b-1">
+            {/* <i className="text-lg ri-map-pin-2-fill"></i> */}
+            <i className="text-lg ri-map-pin-user-fill"></i>
+            <div>
+              <h3 className="text-lg font-medium">E26/25-4</h3>
+              <p className="text-gray-600 text-base -mt-1">
+                Islam Nagar Walton Road Lahore Cantt
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-5 mt-2 p-3">
+            <i className="text-lg ri-currency-fill"></i>
+            <div>
+              <h3 className="text-lg font-medium">Pkr 350</h3>
+              <p className="text-gray-600 text-base -mt-1">Discount Rate</p>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={() => {}}
+          className="w-full mt-5 bg-gray-500 text-white font-semibold p-2 rounded-lg"
+        >
+          Reject Ride
+        </button>
+        <button
+          onClick={() => {}}
+          className="w-full mt-1 bg-green-600 text-white font-semibold p-2 rounded-lg"
+        >
+          Accept Ride
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default RidePopUp;

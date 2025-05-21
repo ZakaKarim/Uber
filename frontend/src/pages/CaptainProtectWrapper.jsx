@@ -4,7 +4,7 @@ import { CaptainDataContext } from "../context/CaptainContext"
 import axios from "axios";
 
 const CaptainProtectWrapper = ({ children }) => {
-  //Phel user use kiya tha than if the cptain update the page to wo logout ho jay gay
+  //Phel user use kiya tha than if the captain update the page to wo logout ho jay gay
   //so to overcome that problem we use Token of the login captin
   //   const { user } = useContext(UserContextData);
   const token = localStorage.getItem("token");
