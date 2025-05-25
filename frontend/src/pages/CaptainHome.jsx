@@ -4,13 +4,18 @@ import CaptainDetails from "../components/CaptainDetails";
 import RidePopUp from "../components/RidePopUp";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 
 const CaptainHome = () => {
 
   const [ridePopPanel, setRidePopPanel] = useState(true);
-  const RidePopPanelRef = useRef(null)
+  const [confirmridePopPanel, setConfirmRidePopPanel] = useState(false);
 
-   // GSAP TO OPEN THE RidePopPanel when clicking on icon
+
+  const RidePopPanelRef = useRef(null)
+  const ConfirmRidePopPanelRef = useRef(null)
+
+  // GSAP TO OPEN THE RidePopPanel
   useGSAP(
     function () {
       if (ridePopPanel) {
@@ -24,6 +29,22 @@ const CaptainHome = () => {
       }
     },
     [ridePopPanel]
+  );
+
+   // GSAP TO OPEN THE ConfirmRidePopPanel 
+  useGSAP(
+    function () {
+      if (confirmridePopPanel) {
+        gsap.to(ConfirmRidePopPanelRef.current, {
+          transform: "translateY(0)",
+        });
+      } else {
+        gsap.to(ConfirmRidePopPanelRef.current, {
+          transform: "translateY(100%)",
+        });
+      }
+    },
+    [confirmridePopPanel]
   );
 
 
@@ -56,8 +77,15 @@ const CaptainHome = () => {
       </div>
       <div ref={RidePopPanelRef} className="fixed w-full z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12">
         <RidePopUp
-        setRidePopPanel={setRidePopPanel}
-         />
+          setRidePopPanel={setRidePopPanel}
+          setConfirmRidePopPanel={setConfirmRidePopPanel}
+        />
+      </div>
+      <div ref={ConfirmRidePopPanelRef} className="fixed w-full h-screen z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12">
+        <ConfirmRidePopUp
+          setConfirmRidePopPanel={setConfirmRidePopPanel}
+          setRidePopPanel={setRidePopPanel}
+        />
       </div>
     </div>
   );

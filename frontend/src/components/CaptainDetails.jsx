@@ -24,14 +24,16 @@ const CaptainDetails = () => {
           <p className="text-sm text-gray-600">Hours Online</p>
         </div>
         <div className="text-center">
-          <i className="text-3xl font-thin ri-speed-up-line"></i>
-          <h5 className="text-lg font-medium">10.2</h5>
-          <p className="text-sm text-gray-600">Hours Online</p>
+          {/* <i className="text-3xl font-thin ri-speed-up-line"></i> */}
+          <i className="text-3xl ri-pin-distance-line"></i>
+          <h5 className="text-lg font-medium">31km</h5>
+          <p className="text-sm text-gray-600">Total Distance</p>
         </div>
         <div className="text-center">
-          <i className="text-3xl font-thin ri-booklet-line"></i>
-          <h5 className="text-lg font-medium">10.2</h5>
-          <p className="text-sm text-gray-600">Hours Online</p>
+          {/* <i className="text-3xl font-thin ri-booklet-line"></i> */}
+          <i className="text-3xl ri-money-pound-box-line"></i>
+          <h5 className="text-lg font-medium">7000pkr</h5>
+          <p className="text-sm text-gray-600">Total Earning</p>
         </div>
       </div>
     </div>
