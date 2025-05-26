@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const ConfirmRidePopUp = (props) => {
+
+  const [otp, setOtp] = useState('')
+
+  const submitHandler =(e)=>{
+      e.preventDefault()
+  }
+
   return (
     <div>
       <h1
@@ -13,7 +20,7 @@ const ConfirmRidePopUp = (props) => {
       >
         <i className="text-3xl text-gray-400 ri-arrow-down-wide-fill"></i>
       </h1>
-      <h2 className="font-medium text-2xl mb-5">Ride is Confirm</h2>
+      <h2 className="font-medium text-2xl mb-5">Confirm this Ride</h2>
 
       <div className="flex items-center justify-between bg-yellow-400 rounded-lg mt-3 p-3">
         <div className="flex items-center gap-3 ">
@@ -65,22 +72,26 @@ const ConfirmRidePopUp = (props) => {
             }}
           >
             <input
+              value={otp}
+              onChange={(e)=>{
+                setOtp(e.target.value)
+              }}
               type="text"
               className="bg-[#eeee] px-6 py-3 font-mono w-full text-lg items-center rounded-lg mt-3"
               placeholder="Enter OTP"
             />
             <button
               onClick={() => {
-                props.setRidePopPanel(false);
                 props.setConfirmRidePopPanel(false);
+                props.setRidePopPanel(false);
               }}
-              className="w-full mt-5 bg-red-600 text-white font-semibold p-3 rounded-lg"
+              className="w-full text-lg mt-5 bg-red-600 text-white font-semibold p-3 rounded-lg"
             >
               Cancel Ride
             </button>
             <Link
               to="/captain-riding"
-              className="w-full mt-2 flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg"
+              className="w-full text-lg mt-2 flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg"
             >
               Confirm Ride
             </Link>

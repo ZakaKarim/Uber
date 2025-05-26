@@ -60,7 +60,7 @@ const RidePopUp = (props) => {
           onClick={() => {
               props.setRidePopPanel(false);
           }}
-          className="w-full mt-5 bg-gray-500 text-white font-semibold p-2 rounded-lg"
+          className="w-full text-lg mt-5 bg-gray-500 text-white font-semibold p-2 rounded-lg"
         >
           Reject Ride
         </button>
@@ -68,7 +68,7 @@ const RidePopUp = (props) => {
           onClick={() => {
             props.setConfirmRidePopPanel(true)
           }}
-          className="w-full mt-1 bg-green-600 text-white font-semibold p-2 rounded-lg"
+          className="w-full text-lg mt-1 bg-green-600 text-white font-semibold p-2 rounded-lg"
         >
           Accept Ride
         </button>

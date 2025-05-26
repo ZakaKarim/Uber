@@ -55,7 +55,6 @@ const CaptainHome = () => {
           className="w-16"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt=""
-          srcset=""
         />
         <Link
           to="/captain-login"
