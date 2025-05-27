@@ -16,7 +16,7 @@ const FinishRide = (props) => {
           </h1>
           <h2 className="font-medium text-2xl mb-5">Finish this Ride</h2>
     
-          <div className="flex items-center justify-between bg-yellow-400 rounded-lg mt-3 p-3">
+          <div className="flex items-center justify-between border-3 border-yellow-400 rounded-lg mt-3 p-3">
             <div className="flex items-center gap-3 ">
               <img
                 className="h-10 w-10 rounded-full object-cover"
@@ -61,11 +61,12 @@ const FinishRide = (props) => {
             </div>
             <div className="mt-6 p-3 rounded-lg w-full">
                 <Link
-                  to="/captain-riding"
+                  to="/captain-home"
                   className="w-full mt-2  text-lg flex justify-center bg-green-600 text-white font-semibold p-3 rounded-lg"
                 >
                 Finish Ride
                 </Link>
+                <p className='mt-6 text-xs p-4'>Click on finish ride button if you have receive the payment</p>
             </div>
           </div>
         </div>
