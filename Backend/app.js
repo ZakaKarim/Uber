@@ -21,10 +21,12 @@ app.get("/", (req, res) => {
 //Importing Routes
 import userRoute from "./routes/user.routes.js";
 import captainRoute from "./routes/captain.routes.js"
+import mapsRoute from "./routes/maps.routes.js";
 
 //Routes Declaration
 app.use("/user", userRoute);
 app.use("/captain", captainRoute)
+app.use("/maps", mapsRoute);
 
 app.listen(process.env.PORT || 4000, () => {
   console.log(`⚙️ Server is Started on Port : ${process.env.PORT}⚙️`);
