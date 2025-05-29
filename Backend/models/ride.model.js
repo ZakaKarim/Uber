@@ -1,5 +1,3 @@
-import e from "express";
-import { sign } from "jsonwebtoken";
 import mongoose from "mongoose";
 
 const rideSchema = new mongoose.Schema({
