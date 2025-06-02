@@ -1,10 +1,13 @@
 import "dotenv/config";
 import express from "express";
-const app = express();
+import http from "http"; // ✅ Needed to create HTTP server
 import cookieParser from "cookie-parser";
 import connectDB from "./db/db.js";
 import cors from "cors";
+import { initializeSocket } from "./socket.js"; // ✅ Your socket initializer
 
+
+const app = express();
 // Calling the DataBase Function
 connectDB();
 
@@ -30,6 +33,18 @@ app.use("/captain", captainRoute)
 app.use("/maps", mapsRoute);
 app.use("/rides", ridesRoute)
 
-app.listen(process.env.PORT || 4000, () => {
-  console.log(`⚙️ Server is Started on Port : ${process.env.PORT}⚙️`);
+// ✅ Create HTTP server
+const server = http.createServer(app);
+
+// ✅ Initialize Socket.IO with that server
+initializeSocket(server);
+
+// // ✅ Start the server
+// app.listen(process.env.PORT || 4000, () => {
+//   console.log(`⚙️ Server is Started on Port : ${process.env.PORT}⚙️`);
+// });
+// ✅ Start server using `server.listen` instead of `app.listen`
+const PORT = process.env.PORT || 4000;
+server.listen(PORT, () => {
+  console.log(`⚙️ Server is Started on Port: ${PORT} ⚙️`);
 });

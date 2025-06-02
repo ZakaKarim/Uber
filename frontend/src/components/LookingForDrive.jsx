@@ -26,7 +26,7 @@ const LookingForDrive = (props) => {
             <div>
               <h3 className="text-lg font-medium">562-11-A</h3>
               <p className="text-gray-600 text-base -mt-1">
-                Model Town Link Road Lahore Cantt{" "}
+                {props.pickup}
               </p>
             </div>
           </div>
@@ -37,7 +37,7 @@ const LookingForDrive = (props) => {
             <div>
               <h3 className="text-lg font-medium">E26/25-4</h3>
               <p className="text-gray-600 text-base -mt-1">
-                Islam Nagar Walton Road Lahore Cantt
+                {props.destination}
               </p>
             </div>
           </div>
@@ -45,7 +45,7 @@ const LookingForDrive = (props) => {
           <div className="flex items-center gap-5 mt-2 p-3">
             <i className="text-lg ri-currency-fill"></i>
             <div>
-              <h3 className="text-lg font-medium">Pkr 350</h3>
+              <h3 className="text-lg font-medium">Pkr:{props.fare[props.vehicleType]}</h3>
               <p className="text-gray-600 text-base -mt-1">Discount Rate</p>
             </div>
           </div>
