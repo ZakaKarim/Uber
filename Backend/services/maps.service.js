@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Captain } from "../models/captain.model.js"
 
 // 1. Get Coordinates from Address
 const getAddressCoordinates = async (address) => {
@@ -106,6 +107,7 @@ const getDistanceAndTime = async (origin, destination) => {
   }
 };
 
+// 3. Get Suggestions
 const getAutoSuggestions = async (input) => {
   if (!input) {
     throw new Error("Query is required for suggestions");
@@ -135,4 +137,22 @@ const getAutoSuggestions = async (input) => {
   }
 };
 
-export { getAddressCoordinates, getDistanceAndTime, getAutoSuggestions };
+//4. GetCaptainsInTheRadius
+const getCaptainsInTheRadius = async(ltd, lng, radius)=>{
+
+   // radius in km
+
+
+    const captains = await Captain.find({
+        location: {
+            $geoWithin: {
+                $centerSphere: [ [ ltd, lng ], radius / 6371 ]
+            }
+        }
+    });
+
+    return captains;
+
+}
+
+export { getAddressCoordinates, getDistanceAndTime, getAutoSuggestions,getCaptainsInTheRadius };

@@ -27,7 +27,8 @@ const UserProtectWrapper = ({ children }) => {
           }
         }).then(response => {
           if (response.status === 200) {
-            setUser(response.data.user) // Save captain data to context
+             setUser(response.data.user) // Save captain data to context
+            //setUser(response.data)
             setIsLoading(false) // Stop loading
           }
         })
