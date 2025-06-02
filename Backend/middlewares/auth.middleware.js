@@ -26,6 +26,7 @@ export const authUser = async (req, res, next) => {
     }
 
     req.user = user;
+    //console.log("req.user", req.user)
     next();
   } catch (error) {
     console.log("Error in JWT verification", error);

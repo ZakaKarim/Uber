@@ -64,34 +64,39 @@ const getDistanceAndTime = async (origin, destination) => {
     ) {
       const route = response.data.routes[0];
       // Convert distance to km, duration to minutes
-    //   const distanceInKm = route.summary.distance / 1000;
-    //   const durationInMin = route.summary.duration / 60;
+      //   const distanceInKm = route.summary.distance / 1000;
+      //   const durationInMin = route.summary.duration / 60;
 
-    //   // Fare calculation
-    //   const baseFare = 100;
-    //   const costPerKm = 40;
-    //   const costPerMin = 2;
+      //   // Fare calculation
+      //   const baseFare = 100;
+      //   const costPerKm = 40;
+      //   const costPerMin = 2;
 
-    //   const fare =
-    //     baseFare + costPerKm * distanceInKm + costPerMin * durationInMin;
+      //   const fare =
+      //     baseFare + costPerKm * distanceInKm + costPerMin * durationInMin;
       // Convert duration to hours and minutes
-    //   const hours = Math.floor(durationInMin / 60);
-    //   const minutes = Math.round(durationInMin % 60);
-    //   return {
-    //     "Total Distance": `${distanceInKm.toFixed(2)} km`,
-    //     "Estimated Duration": `${hours}h ${minutes}min`,
-    //     "Estimated Fare (PKR)": `₨ ${Math.ceil(fare)}`,
-    //   };
+      //   const hours = Math.floor(durationInMin / 60);
+      //   const minutes = Math.round(durationInMin % 60);
+      //   return {
+      //     "Total Distance": `${distanceInKm.toFixed(2)} km`,
+      //     "Estimated Duration": `${hours}h ${minutes}min`,
+      //     "Estimated Fare (PKR)": `₨ ${Math.ceil(fare)}`,
+      //   };
       //   return {
       //     distance: distanceInKm.toFixed(2), // in kilometers
       //     duration: durationInMin.toFixed(2), // in minutes
       //     Fare: Math.ceil(fare), // rounded to nearest PKR
       //   };
-        return {
-          distance: route.summary.distance, // meters
-          duration: route.summary.duration, // seconds
-          //duration: (route.summary.duration / 60).toFixed(2), // minutes
-        };
+
+      return {
+        distance: route.summary.distance, // meters
+        duration: route.summary.duration, // seconds
+      };
+      // return {
+      //   distance: parseFloat((route.summary.distance / 1000).toFixed(2)), // in km
+      //   duration: parseFloat((route.summary.duration / 60).toFixed(2)),   // in min
+      // };
+
     } else {
       throw new Error("No route found");
     }
