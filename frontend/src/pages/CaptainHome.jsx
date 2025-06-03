@@ -24,8 +24,44 @@ const CaptainHome = () => {
   useEffect(() => {
    console.log("captain",captain)
    socket.emit("join",{ userType: "captain",userId: captain._id})
+
+     const updateLocation = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                  console.log({
+                    userId: captain._id,
+                        location: {
+                            ltd: position.coords.latitude,
+                            lng: position.coords.longitude
+                        }
+                  })
+
+                    socket.emit('update-location-captain', {
+                        userId: captain._id,
+                        location: {
+                            ltd: position.coords.latitude,
+                            lng: position.coords.longitude
+                        }
+                    })
+                })
+            }
+        }
+
+        const locationInterval = setInterval(updateLocation, 10000)
+        updateLocation()
+
+         //return () => clearInterval(locationInterval)
   
   }, [])
+
+  socket.on('new-ride', (data) => {
+
+    console.log("New ride request received:", data);
+
+        // setRide(data)
+        // setRidePopupPanel(true)
+
+    })
   
 
   // GSAP TO OPEN THE RidePopPanel

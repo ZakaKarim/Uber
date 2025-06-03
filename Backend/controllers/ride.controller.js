@@ -1,5 +1,8 @@
 import { createRide, getFare } from "../services/ride.service.js";
+import { getCaptainsInTheRadius,getAddressCoordinates } from "../services/maps.service.js"
 import { validationResult } from "express-validator";
+import { sendMessageToSocketId } from "../socket.js"
+import { Ride } from "../models/ride.model.js";
 
 const CreateRide = async (req, res) => {
     //Handle Validation Errors
@@ -11,7 +14,28 @@ const CreateRide = async (req, res) => {
 
         const { pickup, destination, vehicleType } = req.body
         const ride = await createRide({ user: req.user._id, pickup: pickup, destination: destination, vehicleType: vehicleType })
-        return res.status(200).json({ ride })
+        res.status(200).json({ ride })
+
+        const pickupCoordinates = await getAddressCoordinates(pickup);
+
+        console.log("pickupCoordinates", pickupCoordinates)
+
+        const captainsInRadius = await getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 5);
+
+         ride.otp = ""
+         
+        const rideWithUser  = await Ride.findOne({_id: ride._id}).populate("user");
+        captainsInRadius.map(captain =>{
+            console.log("captain", captain)
+            console.log("ride", ride)
+            sendMessageToSocketId(captain.socketId, {
+                event: "new-ride",
+                data: rideWithUser
+            })
+        })
+        console.log("captainsInRadius", captainsInRadius)
+
+    
 
     } catch (error) {
         console.error("Error fetching coordinates:", error.message);
