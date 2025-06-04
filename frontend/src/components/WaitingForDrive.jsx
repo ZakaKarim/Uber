@@ -20,7 +20,7 @@ const WaitingForDrive = (props) => {
           srcset=""
         />
         <div className='text-right'>
-          <h1 className='text-lg font-medium'>Fahim</h1>
+          <h1 className='text-lg font-medium'>{props.ride?.user.fullname.firstname}</h1>
           <h4 className='text-xl font-semibold -mt-1 -mb-1'>LHR3423</h4>
           <p className='text-sm font-medium'>passo</p>
         </div>

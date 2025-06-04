@@ -26,7 +26,8 @@ export const authUser = async (req, res, next) => {
     }
 
     req.user = user;
-    //console.log("req.user", req.user)
+    // console.log("req.user", req.user)
+    // console.log("req.user._id", req.user._id)
     next();
   } catch (error) {
     console.log("Error in JWT verification", error);
@@ -60,6 +61,7 @@ export const authCaptain = async (req, res, next) => {
     }
 
     req.captain = captain;
+    console.log("req.captain", req.captain);
     next();
   } catch (error) {
     console.log("Error in JWT verification", error);

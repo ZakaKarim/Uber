@@ -1,9 +1,10 @@
-import { createRide, getFare } from "../services/ride.service.js";
+import { createRide, getFare,confirmRide } from "../services/ride.service.js";
 import { getCaptainsInTheRadius,getAddressCoordinates } from "../services/maps.service.js"
 import { validationResult } from "express-validator";
 import { sendMessageToSocketId } from "../socket.js"
 import { Ride } from "../models/ride.model.js";
 
+//Controller to create a ride
 const CreateRide = async (req, res) => {
     //Handle Validation Errors
     const errors = validationResult(req);
@@ -44,6 +45,8 @@ const CreateRide = async (req, res) => {
     }
 }
 
+
+//Controller to get fare for a ride
 const GetFare = async (req, res) => {
     //Handle Validation Errors
     const errors = validationResult(req);
@@ -61,4 +64,30 @@ const GetFare = async (req, res) => {
     }
 }
 
-export { CreateRide, GetFare }
+
+//Controller to confirm the ride
+const ConfirmRide = async (req, res) => {
+    //Handle Validation Errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(404).json({ errors: errors.array() });
+    }
+    try {
+        
+        const { rideId } = req.body;
+        const ride = await confirmRide({ rideId, captain: req.captain });
+
+        sendMessageToSocketId( ride.user.socketId,{
+            event: "ride-confirmed",
+            data: ride
+        })
+
+        return res.status(200).json( ride );
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: err.message });
+    }
+}
+
+
+export { CreateRide, GetFare, ConfirmRide }

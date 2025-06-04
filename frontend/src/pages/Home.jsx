@@ -38,6 +38,7 @@ const Home = () => {
   // const {sendMessage ,receiveMessage} = useContext(SocketContext)
   const {socket} = useContext(SocketContext)
   const {user} = useContext(UserContextData)
+  const [ ride, setRide ] = useState(null)
 
   useEffect(() => {
     console.log("user",user)
@@ -45,6 +46,16 @@ const Home = () => {
     socket.emit("join",{ userType: "user",userId: user._id})
 
   }, [user])
+
+  socket.on('ride-confirmed', ride =>{
+    console.log("ride-confirmed", ride);
+    setVehicleFound(false);
+    setWaitingForDrive(true);
+    setRide(ride)
+    // setVehicleFound(false);
+    // setConfirmRidePanel(false);
+    // setVehiclePanel(false);
+  })
   
 
   const handlePickupChange = async (e) => {
@@ -362,6 +373,8 @@ const Home = () => {
         className="fixed w-full z-10 bottom-0  bg-white px-3 py-6 pt-12"
       >
         <WaitingForDrive
+          ride={ride}
+          setVehicleFound={setVehicleFound}
           waitingForDrive={waitingForDrive}
           setWaitingForDrive={setWaitingForDrive}
         />

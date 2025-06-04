@@ -6,16 +6,19 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ConfirmRidePopUp from "../components/ConfirmRidePopUp";
 import { SocketContext } from "../context/SocketContext";
-import { CaptainDataContext } from "../context/CaptainContext"
+import { CaptainDataContext } from "../context/CaptainContext";
+import axios from "axios";
+
 
 const CaptainHome = () => {
 
-  const [ridePopPanel, setRidePopPanel] = useState(true);
+  const [ridePopPanel, setRidePopPanel] = useState(false);
   const [confirmridePopPanel, setConfirmRidePopPanel] = useState(false);
 
 
   const RidePopPanelRef = useRef(null)
   const ConfirmRidePopPanelRef = useRef(null)
+  const [ride, setRide] = useState(null)
 
 
   const { socket } = useContext(SocketContext)
@@ -58,10 +61,30 @@ const CaptainHome = () => {
 
     console.log("New ride request received:", data);
 
-        // setRide(data)
-        // setRidePopupPanel(true)
+        setRide(data)
+        setRidePopPanel(true)
 
     })
+
+     async function confirmRide() {
+
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/confirm`, {
+
+            rideId: ride._id,
+            captainId: captain._id,
+
+
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+
+        setRidePopPanel(false)
+        setConfirmRidePopPanel(true)
+
+    }
+
   
 
   // GSAP TO OPEN THE RidePopPanel
@@ -124,8 +147,10 @@ const CaptainHome = () => {
       </div>
       <div ref={RidePopPanelRef} className="fixed w-full z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12">
         <RidePopUp
+          ride={ride}
           setRidePopPanel={setRidePopPanel}
           setConfirmRidePopPanel={setConfirmRidePopPanel}
+          confirmRide={confirmRide}
         />
       </div>
       <div ref={ConfirmRidePopPanelRef} className="fixed w-full h-screen z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12">
