@@ -9,7 +9,8 @@ import ConfirmedRide from "../components/ConfirmedRide";
 import LookingForDrive from "../components/LookingForDrive";
 import WaitingForDrive from "../components/WaitingForDrive";
 import { SocketContext } from "../context/SocketContext";
-import { UserContextData } from "../context/UserContext"
+import { UserContextData } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -34,6 +35,7 @@ const Home = () => {
   const [activeField, setActiveField] = useState(null);
   const [fare, setFare] = useState({});
   const [vehicleType, setVehicleType] = useState(null);
+  const navigate = useNavigate();
 
   // const {sendMessage ,receiveMessage} = useContext(SocketContext)
   const {socket} = useContext(SocketContext)
@@ -52,9 +54,13 @@ const Home = () => {
     setVehicleFound(false);
     setWaitingForDrive(true);
     setRide(ride)
-    // setVehicleFound(false);
-    // setConfirmRidePanel(false);
-    // setVehiclePanel(false);
+  })
+
+  socket.on('ride-started', ride=>{
+    console.log("ride-started", ride);
+    setWaitingForDrive(false);
+    // navigate('/riding');
+    navigate('/riding', { state: { ride } }) // Updated navigate to include ride data
   })
   
 
@@ -74,7 +80,7 @@ const Home = () => {
     } catch {
       // handle error
       console.log("error in get sugguestion");
-      return res.status(500).json({ message: error.message });
+      throw new Error("Error fetching pickup suggestions");
     }
   };
 

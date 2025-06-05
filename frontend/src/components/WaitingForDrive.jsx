@@ -24,6 +24,7 @@ const WaitingForDrive = (props) => {
           <h4 className='text-xl font-semibold -mt-1 -mb-1'>{props.ride?.captain.vehicle.plate}</h4>
           <p className='text-lg font-medium'>{props.ride?.captain.vehicle.vehicleType}</p>
           <p className='text-lg font-medium'>{props.ride?.captain.vehicle.color}</p>
+          <h1 className='text-lg font-medium'>Your OTP:{props.ride?.otp}</h1>
         </div>
       </div>
 

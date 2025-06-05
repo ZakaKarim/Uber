@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import FinishRide from "../components/FinishRide";
+
 
 const CaptainRiding = () => {
   const [finishRidePanel, setFinishRidePanel] = useState(false);
 
   const finishRidePanelRed = useRef(null);
+  const location = useLocation();
+  const rideData = location.state?.ride; // Get the ride data from the location state
+  console.log("Ride Data in Captain:", rideData);
 
   // GSAP TO OPEN THE ConfirmRidePopPanel
   useGSAP(
@@ -41,7 +45,7 @@ const CaptainRiding = () => {
           <i className="text-lg font-medium ri-logout-box-line"></i>
         </Link>
       </div>
-      <div className="h-4/5">
+      <div className="h-4/5 ">
         <img
           className="h-full w-full object-cover"
           src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
@@ -71,7 +75,9 @@ const CaptainRiding = () => {
         ref={finishRidePanelRed}
         className="fixed w-full z-10 bottom-0 translate-y-full  bg-white px-3 py-10 pt-12"
       >
-        <FinishRide setFinishRidePanel={setFinishRidePanel}/>
+        <FinishRide
+         ride={rideData}
+         setFinishRidePanel={setFinishRidePanel}/>
       </div>
     </div>
   );
