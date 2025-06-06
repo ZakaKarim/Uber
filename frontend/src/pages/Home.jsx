@@ -11,6 +11,7 @@ import WaitingForDrive from "../components/WaitingForDrive";
 import { SocketContext } from "../context/SocketContext";
 import { UserContextData } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import LiveTracking from "../components/LiveTracking";
 
 const Home = () => {
   const [pickup, setPickup] = useState("");
@@ -244,12 +245,13 @@ const Home = () => {
       />
       <div className="h-screen w-screen">
         {/* <img className='h-full w-full object-cover' src="https://t3.ftcdn.net/jpg/07/28/30/26/360_F_728302620_Xddnf5Cl0K1ACZurd6yByUzHiHMMIoe6.jpg" alt="" srcset="" /> */}
-        <img
+         {/* <img
           className="h-full w-full object-cover"
           src="https://miro.medium.com/v2/resize:fit:1400/0*gwMx05pqII5hbfmX.gif"
           alt=""
           srcset=""
-        />
+        />  */}
+        <LiveTracking/>
       </div>
       <div className="flex flex-col justify-end  h-screen absolute top-0 w-full">
         <div className="h-[30%] bg-white  p-5 relative">
@@ -345,21 +347,6 @@ const Home = () => {
           setVehicleFound={setVehicleFound}
         />
       </div>
-
-      {/* <div
-        ref={vehicleFoundRef}
-        className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
-      >
-        <LookingForDrive
-          createRide={createRide}
-          pickup={pickup}
-          destination={destination}
-          fare={fare}
-          vehicleType={vehicleType}
-          setVehicleFound={setVehicleFound}
-        />
-      </div> */}
-
       <div
         ref={vehicleFoundRef}
         className="fixed w-full z-10 bottom-0 translate-y-full bg-white px-3 py-6 pt-12"
